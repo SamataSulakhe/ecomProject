@@ -6,14 +6,27 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
+import java.util.concurrent.BlockingQueue;
 
 public class Poller implements Runnable {
+	
+	private BlockingQueue<File> fileQueue;
 	private static final String filePath = "D:\\CompanyData";
 	private int prevFileCount = new File(filePath).list().length;
+	
+	public Poller(BlockingQueue<File> fileQueue) {
+		this.fileQueue = fileQueue;
+	}
 
 	@Override
 	public void run() {
 		while(true){
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			int currentFileCount = new File(filePath).list().length;
 			System.out.println("prevFileCount - " + prevFileCount);
 			System.out.println("currentFileCount - " + currentFileCount);
@@ -22,7 +35,8 @@ public class Poller implements Runnable {
 				File latestFile = null;
 				try {
 					latestFile = getMostRecentFile();
-					System.out.println("Recent file - "
+					fileQueue.add(latestFile);
+					System.out.println("Recent file added to the Queue - "
 							+ latestFile.getName());
 				} catch (IOException e) {
 					System.out.println("Error while reading recent file - "
