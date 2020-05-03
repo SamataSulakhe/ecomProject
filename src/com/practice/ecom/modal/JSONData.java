@@ -4,7 +4,7 @@ package com.practice.ecom.modal;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Example {
+public class JSONData {
 
     @SerializedName("data")
     @Expose

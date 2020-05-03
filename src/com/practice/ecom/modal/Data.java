@@ -7,7 +7,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class Data {
 
-    @SerializedName("advance_paid")
+	@SerializedName("id")
+    @Expose
+    private Integer salesorderID;
+	@SerializedName("advance_paid")
     @Expose
     private Double advancePaid;
     @SerializedName("company")
@@ -67,6 +70,14 @@ public class Data {
     @SerializedName("cust_address")
     @Expose
     private String custAddress;
+    
+    public Integer getSalesorderID() {
+		return salesorderID;
+	}
+
+	public void setSalesorderID(Integer salesorderID) {
+		this.salesorderID = salesorderID;
+	}
 
     public Double getAdvancePaid() {
         return advancePaid;

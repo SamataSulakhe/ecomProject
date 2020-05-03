@@ -8,26 +8,26 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.util.concurrent.BlockingQueue;
 
+import com.practice.ecom.utils.EcomConstants;
+
 public class Poller implements Runnable {
-	
+
 	private BlockingQueue<File> fileQueue;
-	private static final String filePath = "D:\\CompanyData";
-	private int prevFileCount = new File(filePath).list().length;
-	
+	private int prevFileCount = new File(EcomConstants.JSON_FILE_PATH).list().length;
+
 	public Poller(BlockingQueue<File> fileQueue) {
 		this.fileQueue = fileQueue;
 	}
 
 	@Override
 	public void run() {
-		while(true){
+		while (true) {
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			int currentFileCount = new File(filePath).list().length;
+			int currentFileCount = new File(EcomConstants.JSON_FILE_PATH).list().length;
 			System.out.println("prevFileCount - " + prevFileCount);
 			System.out.println("currentFileCount - " + currentFileCount);
 			if (currentFileCount > prevFileCount) {
@@ -39,8 +39,8 @@ public class Poller implements Runnable {
 					System.out.println("Recent file added to the Queue - "
 							+ latestFile.getName());
 				} catch (IOException e) {
-					System.out.println("Error while reading recent file - "
-							+ e);
+					System.out
+							.println("Error while reading recent file - " + e);
 				}
 
 			}
@@ -48,7 +48,7 @@ public class Poller implements Runnable {
 	}
 
 	private File getMostRecentFile() throws IOException {
-		File directory = new File(filePath);
+		File directory = new File(EcomConstants.JSON_FILE_PATH);
 		File[] files = directory.listFiles();
 		File chosenFile = null;
 		BasicFileAttributes fileAttributes = Files.readAttributes(
