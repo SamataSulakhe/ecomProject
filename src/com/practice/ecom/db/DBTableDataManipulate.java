@@ -62,6 +62,8 @@ public class DBTableDataManipulate {
 								+ EcomConstants.COMPANY_TABLE_NAME + " ");
 				e.printStackTrace();
 			}
+		}else{
+			System.out.println("Already Data Exists in "+EcomConstants.COMPANY_TABLE_NAME);
 		}
 	}
 
@@ -90,6 +92,8 @@ public class DBTableDataManipulate {
 								+ EcomConstants.COMPANYGROUP_TABLE_NAME + " "
 								+ e);
 			}
+		}else{
+			System.out.println("Already Data Exists in "+EcomConstants.COMPANYGROUP_TABLE_NAME);
 		}
 
 	}
@@ -118,6 +122,8 @@ public class DBTableDataManipulate {
 								+ EcomConstants.CUSTOMER_TABLE_NAME + " ");
 				e.printStackTrace();
 			}
+		}else{
+			System.out.println("Already Data Exists in "+EcomConstants.CUSTOMER_TABLE_NAME);
 		}
 	}
 
@@ -155,6 +161,8 @@ public class DBTableDataManipulate {
 								+ EcomConstants.SALESORDER_TABLE_NAME + " ");
 				e.printStackTrace();
 			}
+		}else{
+			System.out.println("Already Data Exists in "+EcomConstants.SALESORDER_TABLE_NAME);
 		}
 	}
 	
@@ -188,6 +196,8 @@ public class DBTableDataManipulate {
 								+ EcomConstants.ITEM_TABLE_NAME + " ");
 				e.printStackTrace();
 			}
+		}else{
+			System.out.println("Already Data Exists in "+EcomConstants.ITEM_TABLE_NAME);
 		}
 	}
 

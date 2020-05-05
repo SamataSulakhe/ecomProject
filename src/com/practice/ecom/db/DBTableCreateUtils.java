@@ -5,15 +5,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBTableCreateUtils {
-	
-	public static void createTables(Connection conn){
+
+	public static void createTables(Connection conn) {
 		createTableCompanyGroup(conn);
 		createTableCompany(conn);
 		createTableCustomer(conn);
 		createTableSalesOrderData(conn);
 		createTableSalesOrderItem(conn);
 	}
-	
+
 	public static void createTableCompanyGroup(Connection conn) {
 
 		String sql = "CREATE TABLE IF NOT EXISTS CompanyGroup (\n"
@@ -21,12 +21,15 @@ public class DBTableCreateUtils {
 
 		try (Statement stmt = conn.createStatement()) {
 			stmt.execute(sql);
+System.out.println("CHECK "+stmt.execute(sql));
+			System.out.println("Table CompanyGroup Created Successfully!!!  "
+					+ stmt.execute(sql));
+
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println("Table CompanyGroup Created Successfully!!!");
 	}
-	
+
 	public static void createTableCompany(Connection conn) {
 
 		String sql = "CREATE TABLE IF NOT EXISTS Company (\n"
@@ -38,12 +41,13 @@ public class DBTableCreateUtils {
 
 		try (Statement stmt = conn.createStatement()) {
 			stmt.execute(sql);
+			System.out.println("CHECK Com "+stmt.execute(sql));
+			System.out.println("Table Company Created Successfully!!!");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println("Table Company Created Successfully!!!");
 	}
-	
+
 	public static void createTableCustomer(Connection conn) {
 
 		String sql = "CREATE TABLE IF NOT EXISTS Customer (\n"
@@ -52,12 +56,13 @@ public class DBTableCreateUtils {
 
 		try (Statement stmt = conn.createStatement()) {
 			stmt.execute(sql);
+			System.out.println("Table Customer Created Successfully!!!");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println("Table Customer Created Successfully!!!");
+
 	}
-	
+
 	public static void createTableSalesOrderData(Connection conn) {
 
 		String sql = "CREATE TABLE IF NOT EXISTS SalesOrderData (\n"
@@ -79,30 +84,29 @@ public class DBTableCreateUtils {
 
 		try (Statement stmt = conn.createStatement()) {
 			stmt.execute(sql);
+			System.out.println("Table SalesOrderData Created Successfully!!!");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println("Table SalesOrderData Created Successfully!!!");
+
 	}
 
 	public static void createTableSalesOrderItem(Connection conn) {
 
 		String sql = "CREATE TABLE IF NOT EXISTS SalesOrderItem (\n"
-				+ "	id TEXT PRIMARY KEY,\n"
-				+ " base_amount TEXT NOT NULL,\n"
+				+ "	id TEXT PRIMARY KEY,\n" + " base_amount TEXT NOT NULL,\n"
 				+ " base_rate INTEGER NOT NULL,\n"
-				+ " description TEXT NOT NULL,\n" 
-				+ " doctype TEXT NOT NULL,\n"
-				+ " item_name TEXT NOT NULL,\n" 
-				+ " warehouse TEXT NOT NULL\n"
+				+ " description TEXT NOT NULL,\n" + " doctype TEXT NOT NULL,\n"
+				+ " item_name TEXT NOT NULL,\n" + " warehouse TEXT NOT NULL\n"
 				+ ");";
 
 		try (Statement stmt = conn.createStatement()) {
 			stmt.execute(sql);
+			System.out.println("Table SalesOrderItem Created Successfully!!!");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println("Table SalesOrderItem Created Successfully!!!");
+
 	}
 
 }

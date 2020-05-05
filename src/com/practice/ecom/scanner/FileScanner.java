@@ -20,42 +20,40 @@ public class FileScanner implements Runnable {
 	private Gson gson;
 	private Connection conn = null;
 
-	
 	public FileScanner(BlockingQueue<File> fileQueue) {
 		this.fileQueue = fileQueue;
 		this.gson = new Gson();
+
 	}
 
 	@Override
 	public void run() {
-		
-		while(true) {
-			try {
-				  Thread.sleep(2000);
-				  conn = DBUtils.connect();
-				  readFile = fileQueue.poll();
-				  if(readFile != null) {
-					  if(conn != null){
+		conn = DBUtils.connect();
+		try {
+			while (true) {
+				Thread.sleep(2000);
+				readFile = fileQueue.poll();
+				if (readFile != null) {
+					if (conn != null) {
 						DBTableCreateUtils.createTables(conn);
-					    JSONData jsonData = gson.fromJson(new FileReader(readFile), JSONData.class);
-					    if(jsonData.getData() != null)
-					    	DBTableDataManipulate.persistData(jsonData.getData(),conn);
-					  }
-				  }
-
-			} catch (InterruptedException | FileNotFoundException e) {
-				System.out.println("Error in File Scanning"+ e);
-			}finally{
-				if(conn != null){
-					try {
-						conn.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
+						JSONData jsonData = gson.fromJson(new FileReader(
+								readFile), JSONData.class);
+						if (jsonData.getData() != null)
+							DBTableDataManipulate.persistData(
+									jsonData.getData(), conn);
 					}
 				}
 			}
-			
+		} catch (InterruptedException | FileNotFoundException e) {
+			System.out.println("Error in File Scanning" + e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 }
-
